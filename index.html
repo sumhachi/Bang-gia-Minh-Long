@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tính tiền Photocopy</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#1a1a1a;
+color:white;
+text-align:center;
+padding-top:40px;
+}
+
+h2{
+color:#ffd700;
+}
+
+select,input{
+font-size:20px;
+padding:10px;
+margin:10px;
+width:220px;
+text-align:center;
+}
+
+button{
+font-size:20px;
+padding:10px 25px;
+background:#ffd700;
+border:none;
+cursor:pointer;
+}
+
+#result{
+font-size:32px;
+margin-top:25px;
+color:#ffd700;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>📄 Tính tiền Photocopy</h2>
+
+<select id="paper">
+<option value="A4">Giấy A4</option>
+<option value="A3">Giấy A3</option>
+</select>
+
+<br>
+
+<input id="copies" type="number" placeholder="Nhập số bản">
+
+<br>
+
+<button onclick="calc()">Tính tiền</button>
+
+<div id="result"></div>
+
+<script>
+
+function calc(){
+
+let n = parseInt(document.getElementById("copies").value) || 0
+let type = document.getElementById("paper").value
+
+let price
+
+if(type=="A4"){
+
+price = [2000,1000,800,600,500,400]
+
+}
+
+else{
+
+price = [4000,3000,2400,1800,1500,1200]
+
+}
+
+let total = 0
+
+if(n>=1) total += price[0]
+
+if(n>1) total += Math.min(n-1,9)*price[1]
+
+if(n>10) total += Math.min(n-10,20)*price[2]
+
+if(n>30) total += Math.min(n-30,20)*price[3]
+
+if(n>50) total += Math.min(n-50,50)*price[4]
+
+if(n>100) total += (n-100)*price[5]
+
+document.getElementById("result").innerHTML =
+"Tổng tiền: "+total.toLocaleString()+" đ"
+
+}
+
+</script>
+
+</body>
+</html>
